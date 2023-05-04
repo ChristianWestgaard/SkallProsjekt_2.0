@@ -26,6 +26,9 @@ app.get('/logInn', function(req, res){
   res.render('logInn')
 })
 
+app.get('/signin', function(req, res){
+  res.render('signin')
+})
 
 app.listen(8080);
 console.log('Server is listening on port 8080');
