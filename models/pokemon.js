@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const pokeSchema = new Schema({
-    type: {
+    name: {
         type: String, 
         required: true},
-    name: {
+    type: {
         type: String, 
         required: true},
     ability0: {
