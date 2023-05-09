@@ -1,10 +1,22 @@
+const { log } = require('console');
 var express = require('express');
+const mongoose = require('mongoose');
+const Species = require('./models/pokemon');
+
+
 var app = express();
+
+const uri = "mongodb+srv://readUser:Reader1@store.rrovops.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(uri);
+  // then((result) => console.log("connected to db"));
+
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
 app.use(express.static("public"))
+
+app.use(express.urlencoded({extended: true}));
 
 // use res.render to load up an ejs view file
 
@@ -28,6 +40,15 @@ app.get('/logInn', function(req, res){
 
 app.get('/signin', function(req, res){
   res.render('signin')
+})
+
+app.get('/nyPokeSide', function(req, res){
+  res.render('nyPokeSide')
+})
+
+app.post('/nyPokeSide', function(req, res){
+  console.log(req.body);
+  res.render('nyPokeSide')
 })
 
 app.listen(8080);

@@ -1,0 +1,50 @@
+<%- include('partials/header.ejs') %>
+
+<form action="/nyPokeSide" method="post">
+
+    <div class="group">      
+        <input name="nameInput" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label id="inputName">Name</label>
+    </div>
+      
+    <div class="group">      
+        <input name="TypeInput" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label id="inputType">Type</label>
+    </div>
+
+    <div class="group">      
+        <input name="A1Input" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label id="inputAbility0">Ability Nr 1</label>
+    </div>
+
+    <div class="group">      
+        <input name="A2Input" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label id="inputAbility1">Ability Nr 2</label>
+    </div>
+
+    <div class="group">      
+        <input name="A3Input" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label id="inputAbility2">Ability Nr 3</label>
+    </div>    
+
+    <div class="group">      
+        <input name="SignInput" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label id="NameOnCard">Signert av</label>
+    </div>  
+    <button>Apply</button>
+  </form>
+
+</body>
+</html>
