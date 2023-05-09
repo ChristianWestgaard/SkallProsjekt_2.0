@@ -179,3 +179,10 @@ body {
   }
   input:focus 		{ outline:none; }
   
+.pokeCard{
+  background-color: #c0bebe;
+  width: 30%;
+  height: 200px;
+  margin-left: 35%;
+  margin-top: 60px;
+}

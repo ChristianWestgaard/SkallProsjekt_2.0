@@ -18,6 +18,14 @@ app.use(express.static("public"))
 
 app.use(express.urlencoded({extended: true}));
 
+
+function uploadPoke() {
+  
+}
+
+
+
+
 // use res.render to load up an ejs view file
 
 // index page
@@ -48,6 +56,11 @@ app.get('/nyPokeSide', function(req, res){
 
 app.post('/nyPokeSide', function(req, res){
   console.log(req.body);
+  try{
+    test.Species.insertMany(req.body);
+  } catch (err) {
+    log
+  }
   res.render('nyPokeSide')
 })
 
