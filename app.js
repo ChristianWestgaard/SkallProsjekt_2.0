@@ -1,13 +1,16 @@
 const { log } = require('console');
 var express = require('express');
+const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const Species = require('./models/pokemon');
+const { database } = require('firebase-admin');
 
 
 var app = express();
 
 const uri = "mongodb+srv://readUser:Reader1@store.rrovops.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+const client = new MongoClient(uri)
   // .then((result) => console.log("connected to db"));
   // .catch((err) => console.log(err));
 
@@ -19,17 +22,18 @@ app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}));
 
 
-function uploadPoke() {
-  
-}
-
-
-
-
 // use res.render to load up an ejs view file
 
 // index page
 app.get('/', function(req, res) {
+  try{
+    const database = client.db("test")
+
+    database.collection("Species").findOne({type: fire})
+
+  } finally {
+    client.close
+  }
   res.render('index');
 });
 
@@ -55,14 +59,20 @@ app.get('/nyPokeSide', function(req, res){
 })
 
 app.post('/nyPokeSide', function(req, res){
-  console.log(req.body);
-  try{
-    test.Species.insertMany(req.body);
-  } catch (err) {
-    log
-  }
+  // console.log(req.body);
+  const pokeInput = req.body
+  console.log(pokeInput);
   res.render('nyPokeSide')
-})
+    try{
+      const database = client.db("test")
+      const doc = req.body
+
+      database.collection("Species").insertOne(doc)
+      console.log("A document was added with the value of"+req.body);
+    } finally {
+      client.close
+    }
+  });
 
 app.listen(8080);
 console.log('Server is listening on port 8080');
