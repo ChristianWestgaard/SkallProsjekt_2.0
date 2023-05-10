@@ -7,9 +7,9 @@ const Species = require('./models/pokemon');
 var app = express();
 
 const uri = "mongodb+srv://readUser:Reader1@store.rrovops.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri);
-  // then((result) => console.log("connected to db"));
-
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  // .then((result) => console.log("connected to db"));
+  // .catch((err) => console.log(err));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-// about page
+
 app.get('/minBlogg', function(req, res) {
   res.render('bloggSide');
 });
