@@ -3,8 +3,6 @@ var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const Species = require('./models/pokemon');
-const { database } = require('firebase-admin');
-
 
 var app = express();
 
