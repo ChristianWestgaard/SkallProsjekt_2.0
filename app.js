@@ -24,14 +24,6 @@ app.use(express.urlencoded({extended: true}));
 
 // index page
 app.get('/', function(req, res) {
-  try{
-    const database = client.db("test")
-
-    database.collection("Species").findOne({type: fire})
-
-  } finally {
-    client.close
-  }
   res.render('index');
 });
 
