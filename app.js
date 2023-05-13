@@ -40,8 +40,21 @@ app.get('/logInn', function(req, res){
   res.render('logInn')
 })
 
-app.get('/signin', function(req, res){
-  res.render('signin')
+app.get('/signup', function(req, res){
+  res.render('signup')
+})
+
+app.post('/signup', function(req, res){
+  const signupCreds = req.body
+  console.log(signupCreds);
+  res.render('signup')
+  try{
+    const database = client.db("users")
+    const doc = req.body
+    database.collection.insertOne(doc)
+  } finally {
+    client.close
+  }
 })
 
 app.get('/nyPokeSide', function(req, res){
