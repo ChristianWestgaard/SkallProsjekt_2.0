@@ -9,14 +9,10 @@ var app = express();
 const uri = "mongodb+srv://readUser:Reader1@store.rrovops.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 const client = new MongoClient(uri)
-  // .then((result) => console.log("connected to db"));
-  // .catch((err) => console.log(err));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-
 app.use(express.static("public"))
-
 app.use(express.urlencoded({extended: true}));
 
 
@@ -27,19 +23,13 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-
-app.get('/minBlogg', function(req, res) {
-  res.render('bloggSide');
-});
-
-app.get('/folger', function(req, res){
-  res.render('subscribed')
-})
-
+//log inn side
 app.get('/logInn', function(req, res){
   res.render('logInn')
 })
+//Legg til get req til mogo her
 
+//sign up side med post req
 app.get('/signup', function(req, res){
   res.render('signup')
 })
@@ -57,6 +47,7 @@ app.post('/signup', function(req, res){
   }
 })
 
+//Lag en ny pokemon side med post req for å legge til DB
 app.get('/nyPokeSide', function(req, res){
   res.render('nyPokeSide')
 })
@@ -77,6 +68,7 @@ app.post('/nyPokeSide', function(req, res){
     }
   });
 
+// setter localhosten til 8080
 app.listen(8080);
 console.log('Server is listening on port 8080');
 
