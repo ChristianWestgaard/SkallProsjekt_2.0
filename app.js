@@ -21,39 +21,39 @@ app.use(express.urlencoded({extended: true}));
 
 
 
-app.post('/signup', function(req, res){
-  const signupCreds = req.body
-  console.log(signupCreds);
-  res.render('signup')
-  try{
-    const database = client.db("users")
-    const doc = req.body
-    database.collection.insertOne(doc)
-  } finally {
-    client.close
-  }
-})
+// app.post('/signup', function(req, res){
+//   const signupCreds = req.body
+//   console.log(signupCreds);
+//   res.render('signup')
+//   try{
+//     const database = client.db("users")
+//     const doc = req.body
+//     database.collection.insertOne(doc)
+//   } finally {
+//     client.close
+//   }
+// })
 
 //Lag en ny pokemon side med post req for å legge til DB
-app.get('/nyPokeSide', function(req, res){
-  res.render('nyPokeSide')
-})
+// app.get('/nyPokeSide', function(req, res){
+//   res.render('nyPokeSide')
+// })
 
-app.post('/nyPokeSide', function(req, res){
-  // console.log(req.body);
-  const pokeInput = req.body
-  console.log(pokeInput);
-  res.render('nyPokeSide')
-    try{
-      const database = client.db("test")
-      const doc = req.body
+// app.post('/nyPokeSide', function(req, res){
+//   // console.log(req.body);
+//   const pokeInput = req.body
+//   console.log(pokeInput);
+//   res.render('nyPokeSide')
+//     try{
+//       const database = client.db("test")
+//       const doc = req.body
 
-      database.collection("Species").insertOne(doc)
-      console.log("A document was added with the value of"+req.body);
-    } finally {
-      client.close
-    }
-  });
+//       database.collection("Species").insertOne(doc)
+//       console.log("A document was added with the value of"+req.body);
+//     } finally {
+//       client.close
+//     }
+//   });
 
 app.use(router)
 
