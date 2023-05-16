@@ -1,24 +1,20 @@
 <%- include('partials/header.ejs') %>
     
     <%if(pokemon.length > 0){%>
-        <%pokomon.forEach(pokomons => {%>
-            <div class="pokomon-cont">
-                <div class="pokomon-image">
-                    <img src="data:<%= pokomons.image.contentType %>;base64,<%= pokomons.image.data.toString('base64') %>" alt="A picture of a chinpokomon">
-                </div>
-                <div class="pokomon-content">
-                    <h1><%=pokomons.name%></h1>
+        <%pokemon.forEach(pokemons => {%>
+            <div class="pokemon-cont">
+
+                <div class="pokemon-content">
+                    <h1><%=pokemons.name%></h1>
                     <h2>Abilities:</h2>
-                    <p>1 - <%=pokomons.ability1%></p>
-                    <p>2 - <%=pokomons.ability2%></p>
-                    <p>3 - <%=pokomons.ability3%></p>
-                    <p class="author-para"><%=pokomons.author%></p>
+                    <p>1 - <%=pokemons.ability0%></p>
+                    <p>2 - <%=pokemons.ability1%></p>
+                    <p>3 - <%=pokemons.ability2%></p>
+                    <p class="author-para"><%=pokemons.author%></p>
                 </div>
 
             </div>
 
         <%})%>
-      <%}else{%>
-        <p>THERES NOTHING TO DISPLAY</p>
       <%}%>
 <%- include('partials/footer.ejs') %>

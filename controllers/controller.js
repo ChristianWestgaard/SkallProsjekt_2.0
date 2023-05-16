@@ -1,7 +1,14 @@
 // requires
-const Species = require("../models/pokemon");
+const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+const Species = require('../models/pokemon');
 const multer = require('multer');
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
+const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@store.rrovops.mongodb.net/?retryWrites=true&w=majority`;
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+const client = new MongoClient(uri)
 
 //Memory
 const storage = multer.memoryStorage();
@@ -37,6 +44,8 @@ const createToken = (id) => {
 module.exports.index_get = async (req,res) => { //a function that renders our routes from AuthRoutes
     await Species.find().sort({ createdAt: -1}).limit(10)
     .then((result) => {
+        let name2 = process.env.BLAH
+        console.log(name2);
         res.render('index', {title: 'All Pokomons', pokemon: result})
     })
     .catch((err) => {
@@ -44,6 +53,34 @@ module.exports.index_get = async (req,res) => { //a function that renders our ro
       console.log(err);
   })
   }
+
+
+module.exports.nyPokeSide_get = async (req,res) =>{
+    res.render('nyPokeSide')
+}
+
+module.exports.nyPokeSide_post = async (req,res)=> { //a function that renders our routes from AuthRoutes
+    
+    const pokeInput = req.body
+    
+    console.log(pokeInput);
+    
+    res.render('nyPokeSide')
+    
+    try{
+    
+        const database = client.db("test")
+    const doc = req.body
+    
+      database.collection("Species").insertOne(doc)
+      console.log("A document was added with the value of"+req.body);
+
+    } catch(err) {
+
+        console.log(err);
+
+    }
+  };
 
 //   module.exports.account_post = async (req, res) => {
 //     upload(req, res, async function (err) {

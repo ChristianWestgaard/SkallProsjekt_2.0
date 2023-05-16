@@ -1,15 +1,13 @@
 const { log } = require('console');
 var express = require('express');
-const MongoClient = require('mongodb').MongoClient;
-const mongoose = require('mongoose');
-const Species = require('./models/pokemon');
+
 const router = require("./router/router")
 
 var app = express();
 
-const uri = "mongodb+srv://readUser:Reader1@store.rrovops.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-const client = new MongoClient(uri)
+// const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@store.rrovops.mongodb.net/?retryWrites=true&w=majority`;
+// mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+// const client = new MongoClient(uri)
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
