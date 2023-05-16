@@ -3,6 +3,7 @@ var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const Species = require('./models/pokemon');
+const router = require("./router/router")
 
 var app = express();
 
@@ -18,21 +19,7 @@ app.use(express.urlencoded({extended: true}));
 
 // use res.render to load up an ejs view file
 
-// index page
-app.get('/', function(req, res) {
-  res.render('index');
-});
 
-//log inn side
-app.get('/logInn', function(req, res){
-  res.render('logInn')
-})
-//Legg til get req til mogo her
-
-//sign up side med post req
-app.get('/signup', function(req, res){
-  res.render('signup')
-})
 
 app.post('/signup', function(req, res){
   const signupCreds = req.body
@@ -67,6 +54,8 @@ app.post('/nyPokeSide', function(req, res){
       client.close
     }
   });
+
+app.use(router)
 
 // setter localhosten til 8080
 app.listen(8080);

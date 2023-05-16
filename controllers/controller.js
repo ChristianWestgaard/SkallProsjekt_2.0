@@ -1,9 +1,7 @@
 // requires
-const pokemon = require("../models/pokemon");
-const pokemon = require("../models/image");
-const pokemon = require("../models/user");
-const multer = require('muter');
-const jwt = require('jasonwebtoken')
+const Species = require("../models/pokemon");
+const multer = require('multer');
+const jwt = require('jsonwebtoken')
 
 //Memory
 const storage = multer.memoryStorage();
@@ -35,3 +33,14 @@ const createToken = (id) => {
     }
     return errors;
 }
+
+module.exports.index_get = async (req,res) => { //a function that renders our routes from AuthRoutes
+    await Species.find().sort({ createdAt: -1}).limit(10)
+    .then((result) => {
+        res.render('index', {title: 'All Pokomons', pokemon: result})
+    })
+    .catch((err) => {
+      res.render("error");
+      console.log(err);
+  })
+  }
