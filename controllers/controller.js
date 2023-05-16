@@ -44,3 +44,82 @@ module.exports.index_get = async (req,res) => { //a function that renders our ro
       console.log(err);
   })
   }
+
+  module.exports.account_post = async (req, res) => {
+    upload(req, res, async function (err) {
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred when uploading.
+        console.log(err);
+        res.status(500).send("Error saving image");
+      } else if (err) {
+        // An unknown error occurred when uploading.
+        console.log(err);
+        res.status(500).send("Error saving image");
+      } else {
+        // Everything went fine.
+        const { name, ability1, ability2, ability3, author } = req.body;
+  
+        const image = new Image({
+          name: req.file.originalname,
+          data: req.file.buffer,
+          contentType: req.file.mimetype,
+          key: name,
+        });
+  
+        try {
+          await image.save();
+          const product = await Pokomon.create({ name, ability1, ability2, ability3, author, image });
+          res.status(201);
+          console.log("Pokomon created:", product);
+          res.json(product);
+        } catch (err) {
+          console.log(err);
+          res.status(500).send("Error saving image");
+        }
+      }
+    });
+  };
+
+
+  module.exports.signup_get = (req,res) => {
+    res.render("signup");
+  }
+
+
+  module.exports.pokemon_update = (req, res) => {
+    upload(req, res, async function (err) {
+      if (err instanceof multer.MulterError) {
+        console.log(err);
+        res.status(500).send("Error saving image");
+      } else if (err) {
+        console.log(err);
+        res.status(500).send("Error saving image");
+      } else {
+        const ID = req.params.updateId;
+        const { name, ability1, ability2, ability3, author } = req.body;
+        let image = null;
+        if (req.file) {
+          // process the image if it exists
+          image = new Image({
+            name: req.file.originalname,
+            data: req.file.buffer,
+            contentType: req.file.mimetype,
+            key: name,
+          });
+        }
+        const update = { name, ability1, ability2, ability3, author };
+        if (image) {
+          update.image = image;
+        }
+        Pokomon.findByIdAndUpdate(ID, update)
+          .then((result) => {
+            console.log('Updated Pokomon successfully');
+            res.status(204).send();
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send("Error updating pokomon");
+          });
+      }
+    });
+  };

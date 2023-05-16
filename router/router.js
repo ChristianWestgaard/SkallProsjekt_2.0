@@ -13,4 +13,7 @@ router.post("/logInn", Controller.login_post)
 router.get("/nyPokeSide", Controller.nyPokeSide_get)
 router.post("/nyPokeSide", Controller.nyPokeSide_post)
 
+router.get("/minPokeSide", Controller.minPokeSide_get)
+router.delete("/minPokeSide", Controller.minPokeSide_delete)
+
 module.exports = router;

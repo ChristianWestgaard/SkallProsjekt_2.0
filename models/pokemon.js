@@ -17,6 +17,9 @@ const pokeSchema = new Schema({
     ability2: {
         type: String,
         required: true}
+    author:{
+        type: String,
+        required: true},
 }, {timestamps: true})
 
 const Species = mongoose.model('Species', pokeSchema);
