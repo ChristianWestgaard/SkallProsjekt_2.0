@@ -16,7 +16,7 @@ const pokeSchema = new Schema({
         required: true},
     ability2: {
         type: String,
-        required: true}
+        required: true},
     author:{
         type: String,
         required: true},
