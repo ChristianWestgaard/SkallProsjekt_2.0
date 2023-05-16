@@ -22,5 +22,5 @@ const pokeSchema = new Schema({
         required: true},
 }, {timestamps: true})
 
-const Species = mongoose.model('Species', pokeSchema);
-module.exports = Species
+const species = mongoose.model('species', pokeSchema);
+module.exports = species

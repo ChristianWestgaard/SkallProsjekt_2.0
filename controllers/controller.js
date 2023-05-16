@@ -1,7 +1,7 @@
 // requires
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
-const Species = require('../models/pokemon');
+const species = require('../models/pokemon');
 const multer = require('multer');
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
@@ -41,17 +41,19 @@ const createToken = (id) => {
     return errors;
 }
 
-module.exports.index_get = async (req,res) => { //a function that renders our routes from AuthRoutes
-    await Species.find().sort({ createdAt: -1}).limit(10)
+module.exports.index_get = async (req,res) => {
+    await species.find().sort({ createdAt: -1}).limit(10)
     .then((result) => {
-        let name2 = process.env.BLAH
-        console.log(name2);
-        res.render('index', {title: 'All Pokomons', pokemon: result})
+
+        res.render('index', {title: 'All Pokemons', pokemon: result})
     })
+
     .catch((err) => {
-      res.render("error");
+
+        res.render("error");
       console.log(err);
-  })
+
+    })
   }
 
 
@@ -59,7 +61,7 @@ module.exports.nyPokeSide_get = async (req,res) =>{
     res.render('nyPokeSide')
 }
 
-module.exports.nyPokeSide_post = async (req,res)=> { //a function that renders our routes from AuthRoutes
+module.exports.nyPokeSide_post = async (req,res)=> {
     
     const pokeInput = req.body
     
@@ -72,7 +74,7 @@ module.exports.nyPokeSide_post = async (req,res)=> { //a function that renders o
         const database = client.db("test")
     const doc = req.body
     
-      database.collection("Species").insertOne(doc)
+      database.collection("species").insertOne(doc)
       console.log("A document was added with the value of"+req.body);
 
     } catch(err) {
