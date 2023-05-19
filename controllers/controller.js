@@ -6,7 +6,7 @@ const multer = require('multer');
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@store.rrovops.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@cluster0.ij6ygv8.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 const client = new MongoClient(uri)
 
@@ -71,7 +71,7 @@ module.exports.nyPokeSide_post = async (req,res)=> {
     
     try{
     
-        const database = client.db("test")
+        const database = client.db("Pokemons")
     const doc = req.body
     
       database.collection("species").insertOne(doc)
@@ -82,7 +82,23 @@ module.exports.nyPokeSide_post = async (req,res)=> {
         console.log(err);
 
     }
-  };
+};
+
+module.exports.logInn_get = async (req,res) => {
+    res.render('logInn')
+}
+
+module.exports.logInn_post = async (req,res) => {
+    const logInput = req.body
+    res.render('logInn')
+    try {
+        const datavase = client.db("user")
+        const doc = req.body
+        console.log(doc);
+    } catch(err) {
+        console.log(err);
+    }
+}
 
 //   module.exports.account_post = async (req, res) => {
 //     upload(req, res, async function (err) {
