@@ -4,8 +4,8 @@ const router  = Router(); ///creates a new router
 
 router.get("/", Controller.index_get);
 
-// router.get("/signup", Controller.signup_get)
-// router.post("/signup", Controller.signup_post)
+router.get("/signup", Controller.signup_get)
+router.post("/signup", Controller.signup_post)
 
  router.get("/logInn", Controller.logInn_get)
  router.post("/logInn", Controller.logInn_post)
