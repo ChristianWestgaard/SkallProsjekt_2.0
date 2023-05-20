@@ -3,10 +3,11 @@ const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const species = require('../models/pokemon');
 const multer = require('multer');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { database } = require('firebase-admin');
 require('dotenv').config()
 
-const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@store.rrovops.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@cluster0.ij6ygv8.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 const client = new MongoClient(uri)
 
@@ -54,25 +55,22 @@ module.exports.index_get = async (req,res) => {
       console.log(err);
 
     })
-  }
+}
 
 
 module.exports.nyPokeSide_get = async (req,res) =>{
     res.render('nyPokeSide')
 }
 
+
 module.exports.nyPokeSide_post = async (req,res)=> {
-    
-    const pokeInput = req.body
-    
-    console.log(pokeInput);
     
     res.render('nyPokeSide')
     
     try{
     
-        const database = client.db("test")
-    const doc = req.body
+        const database = client.db("Pokemons")
+        const doc = req.body
     
       database.collection("species").insertOne(doc)
       console.log("A document was added with the value of"+req.body);
@@ -82,7 +80,39 @@ module.exports.nyPokeSide_post = async (req,res)=> {
         console.log(err);
 
     }
-  };
+};
+
+
+module.exports.logInn_get = async (req,res) => {
+    res.render('logInn')
+};
+
+
+module.exports.logInn_post = async (req,res) => {
+    res.render('logInn')    
+};
+
+
+module.exports.signup_get = async (req,res) => {
+    res.render('signup')
+};
+
+
+module.exports.signup_post = async (req,res) => {
+
+    res.render('signup')
+
+    try {
+
+        const database = client.db("user")
+        const doc = req.body
+        console.log(doc);
+        database.collection("validUsers").insertOne(doc)
+
+    } catch(err) {
+        console.log(err);
+    }
+}
 
 //   module.exports.account_post = async (req, res) => {
 //     upload(req, res, async function (err) {
