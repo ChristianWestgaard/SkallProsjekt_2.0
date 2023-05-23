@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const species = require('../models/pokemon');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
-const { database } = require('firebase-admin');
 require('dotenv').config()
 
 const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@cluster0.ij6ygv8.mongodb.net/?retryWrites=true&w=majority`;
@@ -43,6 +42,7 @@ const createToken = (id) => {
 }
 
 module.exports.index_get = async (req,res) => {
+    
     await species.find().sort({ createdAt: -1}).limit(10)
     .then((result) => {
 
@@ -69,11 +69,11 @@ module.exports.nyPokeSide_post = async (req,res)=> {
     
     try{
     
-        const database = client.db("Pokemons")
+        const database = client.db("test")
         const doc = req.body
     
       database.collection("species").insertOne(doc)
-      console.log("A document was added with the value of"+req.body);
+      console.log(`A document was added`);
 
     } catch(err) {
 
