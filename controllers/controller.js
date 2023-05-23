@@ -2,9 +2,9 @@
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const species = require('../models/pokemon');
+const User = require('../models/user')
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
-const { database } = require('firebase-admin');
 require('dotenv').config()
 
 const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@cluster0.ij6ygv8.mongodb.net/?retryWrites=true&w=majority`;
@@ -43,7 +43,7 @@ const createToken = (id) => {
 }
 
 module.exports.index_get = async (req,res) => {
-    await species.find().sort({ createdAt: -1}).limit(10)
+    await Pokemon.find().sort({ createdAt: -1}).limit(10)
     .then((result) => {
 
         res.render('index', {title: 'All Pokemons', pokemon: result})
@@ -64,21 +64,17 @@ module.exports.nyPokeSide_get = async (req,res) =>{
 
 
 module.exports.nyPokeSide_post = async (req,res)=> {
+        res.render('nyPokeSide')
     
-    res.render('nyPokeSide')
-    
-    try{
-    
+    try{  
         const database = client.db("Pokemons")
         const doc = req.body
     
-      database.collection("species").insertOne(doc)
-      console.log("A document was added with the value of"+req.body);
+        database.collection("species").insertOne(doc)
+        console.log("A document was added with the value of"+req.body);
 
     } catch(err) {
-
-        console.log(err);
-
+        console.log(err)
     }
 };
 
@@ -89,6 +85,8 @@ module.exports.logInn_get = async (req,res) => {
 
 
 module.exports.logInn_post = async (req,res) => {
+    // Destructuring the req.body into two variables (Email and Password)
+    const { email, password } = req.body
     res.render('logInn')    
 };
 
@@ -99,18 +97,22 @@ module.exports.signup_get = async (req,res) => {
 
 
 module.exports.signup_post = async (req,res) => {
+    const { email, password } = req.body
 
     res.render('signup')
 
     try {
 
-        const database = client.db("user")
-        const doc = req.body
-        console.log(doc);
-        database.collection("validUsers").insertOne(doc)
+         const user = await User.create(email, password)
+        res.status(201).json(user)
+        // const database = client.db("validUser")
+        // const doc = req.body
+        // console.log(doc);
+        // database.collection("users").insertOne(doc)
 
     } catch(err) {
         console.log(err);
+        res.status(400).send("error, user not created")
     }
 }
 

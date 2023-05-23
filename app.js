@@ -13,6 +13,7 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 
 // use res.render to load up an ejs view file
