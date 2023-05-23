@@ -43,7 +43,8 @@ const createToken = (id) => {
 }
 
 module.exports.index_get = async (req,res) => {
-    await Pokemon.find().sort({ createdAt: -1}).limit(10)
+
+    await species.find().sort({ createdAt: -1}).limit(10)
     .then((result) => {
 
         res.render('index', {title: 'All Pokemons', pokemon: result})
@@ -57,6 +58,10 @@ module.exports.index_get = async (req,res) => {
     })
 }
 
+module.exports.index_post = async (req,res) => {
+    
+}
+
 
 module.exports.nyPokeSide_get = async (req,res) =>{
     res.render('nyPokeSide')
@@ -66,12 +71,13 @@ module.exports.nyPokeSide_get = async (req,res) =>{
 module.exports.nyPokeSide_post = async (req,res)=> {
         res.render('nyPokeSide')
     
-    try{  
-        const database = client.db("Pokemons")
+    try{
+    
+        const database = client.db("test")
         const doc = req.body
     
-        database.collection("species").insertOne(doc)
-        console.log("A document was added with the value of"+req.body);
+      database.collection("species").insertOne(doc)
+      console.log(`A document was added`);
 
     } catch(err) {
         console.log(err)
