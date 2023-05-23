@@ -42,7 +42,7 @@ const createToken = (id) => {
 }
 
 module.exports.index_get = async (req,res) => {
-    
+
     await species.find().sort({ createdAt: -1}).limit(10)
     .then((result) => {
 
@@ -55,6 +55,10 @@ module.exports.index_get = async (req,res) => {
       console.log(err);
 
     })
+}
+
+module.exports.index_post = async (req,res) => {
+    
 }
 
 
