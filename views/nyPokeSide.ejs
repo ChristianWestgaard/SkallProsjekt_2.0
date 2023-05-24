@@ -1,47 +1,49 @@
 <%- include('partials/header.ejs') %>
 
-<form action="/nyPokeSide" method="post">
+<h1>Her kan du lage din egen Pokemon, skriv inn navn, hvilken type den er, superkrefter og navnet ditt til slutt. </h1>
 
-    <div class="group">      
+<form class="nyPokeForm" action="/nyPokeSide" method="post">
+
+    <div class="group">
+        <label class="reece" id="inputName">Name</label>      
         <input name="name" type="text" required>
         <span class="highlight"></span>
-        <span class="bar"></span>
-        <label id="inputName">Name</label>
+        <span class="bar"></span><br>
     </div>
       
-    <div class="group">      
+    <div class="group"> 
+        <label class="reece" id="inputType">Type</label>     
         <input name="type" type="text" required>
         <span class="highlight"></span>
-        <span class="bar"></span>
-        <label id="inputType">Type</label>
+        <span class="bar"></span><br>
     </div>
 
-    <div class="group">      
+    <div class="group"> 
+        <label class="reece" id="inputAbility0">Ability Nr 1</label>     
         <input name="ability0" type="text" required>
         <span class="highlight"></span>
-        <span class="bar"></span>
-        <label id="inputAbility0">Ability Nr 1</label>
+        <span class="bar"></span><br>
     </div>
 
-    <div class="group">      
+    <div class="group">
+        <label class="reece" id="inputAbility1">Ability Nr 2</label>      
         <input name="ability1" type="text" required>
         <span class="highlight"></span>
-        <span class="bar"></span>
-        <label id="inputAbility1">Ability Nr 2</label>
+        <span class="bar"></span><br>
     </div>
 
-    <div class="group">      
+    <div class="group">
+        <label class="reece" id="inputAbility2">Ability Nr 3</label>      
         <input name="ability2" type="text" required>
         <span class="highlight"></span>
-        <span class="bar"></span>
-        <label id="inputAbility2">Ability Nr 3</label>
+        <span class="bar"></span><br>
     </div>    
 
-    <div class="group">      
+    <div class="group">
+        <label class="reece" id="NameOnCard">Signert av</label>      
         <input name="author" type="text" required>
         <span class="highlight"></span>
-        <span class="bar"></span>
-        <label id="NameOnCard">Signert av</label>
+        <span class="bar"></span><br>
     </div>  
     <button class="button applyB">Apply</button>
   </form>

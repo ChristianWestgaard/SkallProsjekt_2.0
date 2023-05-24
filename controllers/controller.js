@@ -2,6 +2,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const species = require('../models/pokemon');
+const User = require('../models/user')
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const handleErrors = ('err')
@@ -77,8 +78,7 @@ module.exports.nyPokeSide_get = async (req,res) =>{
 
 
 module.exports.nyPokeSide_post = async (req,res)=> {
-    
-    res.render('nyPokeSide')
+        res.render('nyPokeSide')
     
     try{
     
@@ -89,9 +89,7 @@ module.exports.nyPokeSide_post = async (req,res)=> {
       console.log(`A document was added`);
 
     } catch(err) {
-
-        console.log(err);
-
+        console.log(err)
     }
 };
 
@@ -102,6 +100,8 @@ module.exports.logInn_get = async (req,res) => {
 
 
 module.exports.logInn_post = async (req,res) => {
+    // Destructuring the req.body into two variables (Email and Password)
+    const { email, password } = req.body
     res.render('logInn')    
 };
 
@@ -112,18 +112,22 @@ module.exports.signup_get = async (req,res) => {
 
 
 module.exports.signup_post = async (req,res) => {
+    const { email, password } = req.body
 
     res.render('signup')
 
     try {
 
-        const database = client.db("user")
-        const doc = req.body
-        console.log(doc);
-        database.collection("validUsers").insertOne(doc)
+         const user = await User.create(email, password)
+        res.status(201).json(user)
+        // const database = client.db("validUser")
+        // const doc = req.body
+        // console.log(doc);
+        // database.collection("users").insertOne(doc)
 
     } catch(err) {
         console.log(err);
+        res.status(400).send("error, user not created")
     }
 }
 
