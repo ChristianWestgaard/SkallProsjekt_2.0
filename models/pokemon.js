@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isEmail } = require('validator')
 const Schema = mongoose.Schema;
 
 const pokeSchema = new Schema({

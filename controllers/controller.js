@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const species = require('../models/pokemon');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
+const handleErrors = ('err')
 require('dotenv').config()
 
 const uri = `mongodb+srv://${process.env.dataUser}:${process.env.dataPassword}@cluster0.ij6ygv8.mongodb.net/?retryWrites=true&w=majority`;
@@ -58,9 +59,17 @@ module.exports.index_get = async (req,res) => {
 }
 
 module.exports.index_post = async (req,res) => {
-    
+    res.render('index')
 }
 
+module.exports.index_delete = async (req,res) => {
+
+    const sp = req.params.id;
+    species.findByIdAndDelete(sp)
+    .then(result => {
+        res.status(204).send();
+    })
+}
 
 module.exports.nyPokeSide_get = async (req,res) =>{
     res.render('nyPokeSide')
